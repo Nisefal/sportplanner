@@ -1,0 +1,136 @@
+@media screen and (max-width: 1412px) {
+  .wrapper .top-block {
+    padding: 0;
+  }
+}
+@media screen and (max-width: 1250px){
+  main .wrapper .top-block {
+    flex-direction: column;
+  }
+  main .wrapper .top-block .time {
+    margin-top: 23px;
+  }
+}
+@media screen and (max-width: 930px) {
+  body {
+    overflow: hidden;
+  }
+  .mbar {
+    height: 20vw;
+    padding: 0 5vw;
+  }
+  #logout, #settings, #message, #download, #time {
+    height: 6vw;
+    width: 6vw;
+    margin-left: 3vw;
+    z-index: 5;
+  }
+  main #devices {
+    display: none;
+  }
+  #menu-bar {
+    position: relative;
+  }
+  #menu-bar .drop-menu {
+    display: flex;
+    width: 105%;
+    position: absolute;
+    z-index: 5;
+  }
+  #check-menu:checked ~ .main-menu {
+    min-width: 0;
+  }
+  #name-label h3 {
+    display: none;
+  }
+  main .wrapper .top-block {
+    margin: 0;
+    width: 100%;
+    padding: 0;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+  }
+  .top-block .time {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+  main .wrapper .top-block .time p {
+    margin-bottom: 15px;
+    padding: 0;
+    align-self: flex-start;
+  }
+  main .wrapper .top-block .time input {
+    margin-bottom: 10px;
+  }
+  main .wrapper .top-block .time input[type="button"] {
+    margin-right: 0;
+    margin-left: 0;
+  }
+  main .wrapper .top-block #info {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+  }
+  main .wrapper .top-block .time {
+    align-items: flex-start;
+    flex-direction: column;
+    justify-content: space-between;
+
+  }
+  #to-date {
+    justify-content: flex-end;
+    width: 100%;
+  }
+  #from-d {
+    width: 50%;
+  }
+  #to-d {
+    width: 50%;
+    margin-left: 17px;
+  }
+  #to-t {
+
+  }
+
+  #menu-bar #time {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    align-items: center;
+    margin-right: 30vw;
+  }
+  #menu-bar .tools #timeS {
+    display: none;
+  }
+  #menu-bar .tools #download, #message,#logout {
+    margin-right: 2px;
+  }
+  #menu-bar .drop-menu {
+    margin-left: 3vw;
+  }
+  #menu-bar .drop-menu .main-menu {
+    width: 50%;
+    position: absolute;
+    left: 25%;
+    right: 0;
+    bottom: -10px;
+  }
+  .drop-menu .main-menu-tab {
+    text-align: left;
+  }
+  .logo {
+    width: 100%;
+  }
+}

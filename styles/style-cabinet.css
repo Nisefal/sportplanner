@@ -1,0 +1,67 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto:300);
+
+#logout, #settings, #message {
+    height: 1vw;
+    width: 1vw;
+    margin-left: 2vw;
+}
+
+
+body {
+    font-family: "Roboto", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    width: 100%;   
+    margin: 0px;
+    height: 100%;
+}
+
+.device {
+  margin: 2vw;
+}
+
+.rborder {
+  border-right: 1px solid #888;
+}
+
+#devices {
+  height: 100%;
+  width: 25%;
+}
+
+.device-button {
+  width: 100%;
+}
+
+.w3-btn {
+  white-space: normal;
+  word-wrap: break-word;
+}
+
+#container {
+  width: 70%;
+}
+
+.chart {
+  min-height: 300px;
+}
+
+.button-1 {
+  background-color: white;
+  border-radius: 10px;
+  color: blue;
+  border: 2px solid #e7e7e7;
+  border-color: blue;
+}
+
+.button-2 {
+  background-color: white;
+  border-radius: 10px;
+  color: #e7e7e7;
+  border: 2px solid #e7e7e7;
+}
+
+.navbutton {
+  padding: 1.5vw;
+  margin-top: 1vw;
+}

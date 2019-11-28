@@ -1,0 +1,411 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto:300);
+
+* {
+    padding: 0;
+    margin: 0;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.login-page {
+    max-width: 360px;
+    margin: 10% auto 0 auto;
+}
+
+.form {
+    z-index: 1;
+    background: #FFFFFF;
+    max-width: 360px;
+    margin: auto;
+    padding: 45px;
+    text-align: center;
+    -webkit-box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+
+.form input {
+    font-family: "Roboto", sans-serif;
+    outline: 0;
+    background: #f2f2f2;
+    width: 100%;
+    border: 1px;
+    border-style: solid;
+    border-color: #3eb5f1;
+    margin: 0 0 15px;
+    padding: 15px;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    font-size: 14px;
+}
+
+.form button {
+    font-family: "Roboto", sans-serif;
+    text-transform: uppercase;
+    outline: 0;
+    background: #4CAF50;
+    width: 100%;
+    border: 0;
+    padding: 15px;
+    color: #FFFFFF;
+    font-size: 14px;
+    -webkit-transition: all 0.3 ease;
+    -o-transition: all 0.3 ease;
+    transition: all 0.3 ease;
+    cursor: pointer;
+}
+
+.form button:hover, .form button:active, .form button:focus {
+    background: #43A047;
+}
+
+.form .message {
+    margin: 15px 0 0;
+    color: #b3b3b3;
+    font-size: 12px;
+}
+
+.form .message a {
+    color: #4CAF50;
+    text-decoration: none;
+}
+
+.form .register-form {
+    display: none;
+}
+
+/*New style*/
+main {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    width: 100%;
+    height: 100%;
+}
+
+main #devices {
+    display: block;
+}
+
+main .w3-btn {
+    text-decoration: underline;
+}
+
+main.container:before, .container:after {
+    content: "";
+    display: block;
+    clear: both;
+}
+
+main .wrapper {
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    width: 100%;
+    height: 100%;
+    padding: 10px;
+}
+
+main .wrapper .top-block {
+    width: 100%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+main .wrapper .top-block .time {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    flex-direction: row;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-box-align: start;
+    -ms-flex-align: start;
+    align-items: center;
+}
+#from-date {
+    display: flex;
+    flex-direction: row;
+}
+#to-date {
+    display: flex;
+    flex-direction: row;
+}
+
+main .wrapper .top-block .time p {
+    padding: 0 5px;
+}
+main .wrapper .top-block .time input{
+    margin: 0 5px;
+    border: 1px solid #3eb5f1;
+    border-radius: 3px;
+}
+main .wrapper .top-block .time input[type="button"] {
+    margin-right: 0;
+    width: 85px;
+    background: transparent;
+    font-weight: bold;
+}
+main .wrapper .top-block #info {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-align: start;
+    -ms-flex-align: start;
+    align-items: flex-start;
+    text-align: center;
+}
+
+#info .first {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    width: 100%;
+}
+#info .first .divp:last-child {
+    align-self: flex-end;
+}
+#info .first .divp {
+    text-align: left;
+    border-bottom: 1px solid #3eb5f1;
+}
+#info .second {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+}
+#info .second .divp{
+    text-align: left;
+    border-bottom: 1px solid #3eb5f1;
+    margin-top: 10px;
+    width: 100%;
+}
+
+#info .third {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    text-align: left;
+}
+
+#info .third .divp  {
+    text-align: left;
+    border-bottom: 1px solid #3eb5f1;
+    margin-top: 10px;
+}
+
+main .wrapper #info h1 {
+    margin: 0 0 15px;
+    padding: 0;
+    font-size: 36px;
+    font-weight: 300;
+    color: #1a1a1a;
+}
+
+main .wrapper #info span {
+    color: #4d4d4d;
+    font-size: 12px;
+}
+
+main .wrapper #info span a {
+    color: #000000;
+    text-decoration: none;
+}
+
+main .wrapper #info span .fa {
+    color: #EF3B3A;
+}
+
+main .wrapper #container {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    margin-top: 2vw;
+}
+
+body {
+    height: -webkit-fit-content;
+    height: -moz-fit-content;
+    height: fit-content;
+    font-family: "Roboto", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+#menu-bar {
+    position: relative;
+}
+#menu-bar .logo-container {
+    width: 40%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: row;
+    flex-direction: row;
+}
+#menu-bar #time {
+    display: none;
+}
+#menu-bar .tools {
+    width: 40%;
+}
+#download,#message,#logout,#timeS {
+    height: 1vw;
+    width: 3vw;
+    margin-left: 2vw;
+}
+#menu-bar .tools {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack:end;
+    -ms-flex-pack:end;
+    justify-content:flex-end;
+}
+
+#menu-bar .drop-menu {
+    display: none;
+    width: 50%;
+    background-color: transparent;
+    position: relative;
+    color: white;
+    text-align: center;
+    height: 40px;
+    z-index: 5;
+}
+
+#check-menu {
+    display: none;
+}
+
+.drop-menu label {
+    display: block;
+    position: absolute;
+    right: 0;
+    left: 0;
+    margin: 0 auto;
+    width: 25%;
+    height: 100%;
+    cursor: pointer;
+    z-index: 2;
+    line-height: 40px;
+}
+
+.drop-menu .burger-line {
+    position: absolute;
+    top: 17px;
+    left: 0;
+    margin: 0 auto;
+    right: 0;
+    width: 35px;
+    height: 2px;
+    background-color: black;
+    -webkit-transition: .5s all;
+    -o-transition: .5s all;
+    transition: .5s all;
+}
+
+.drop-menu .fourth {
+    top: 28px;
+}
+
+.drop-menu .main-menu {
+    display: block;
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    -webkit-transform: translateY(100%);
+    -ms-transform: translateY(100%);
+    transform: translateY(100%);
+    max-height: 0;
+    font-size: 0;
+    overflow: hidden;
+    -webkit-transition: .5s all;
+    -o-transition: .5s all;
+    transition: .5s all;
+    -webkit-box-shadow: 0px 0px 33px -10px rgba(0,0,0,0.75);
+    box-shadow: 0px 0px 33px -10px rgba(0,0,0,0.75);
+}
+
+.drop-menu .main-menu-tab {
+    display: block;
+    width: 100%;
+    font-size: 20px;
+    padding: 10px;
+    color: white;
+    border-top: 1px solid rgba(255, 255, 255, .3);
+    background-color: rgba(25, 181, 254, 1);
+}
+
+.drop-menu .main-menu-tab:hover {
+    background-color: rgba(1, 50, 67, 0.8);
+}
+
+#check-menu:checked ~ .main-menu {
+    max-height: 500px;
+    font-size: 16px;
+    min-width: 250px;
+    border-radius: 10px;
+}
+
+#check-menu:checked ~ .first {
+    display: none;
+}
+
+#check-menu:checked ~ .second {
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+#check-menu:checked ~ .third {
+    -webkit-transform: rotate(-45deg);
+    -ms-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+}
+
+#check-menu:checked ~ .fourth {
+    display: none;
+}
+
+.logo {
+    width: 20%;
+    height: 50%;
+}

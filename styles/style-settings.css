@@ -1,0 +1,32 @@
+    @import url(https://fonts.googleapis.com/css?family=Roboto:300);
+
+#logout {
+    height: 100%;
+    position: absolute;
+    width: 60px;
+    right: 60px;
+}
+
+#return {
+    height: 100%;
+    position: absolute;
+}
+body {
+    font-family: "Roboto", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale; 
+    margin: 0px;
+}
+._input {
+    width: 250px;
+    height: 18px;
+}
+
+.content {
+    height: 100%;
+    padding-top: 32px;
+    width: 60%;
+    margin-left: 20%;
+    background-color: #D5CECE;
+    padding: 32px;
+}
