@@ -108,7 +108,7 @@ if(isset($_POST['submit']))
                 <input class="input-form" id="e-mail"  type="text" name="email" placeholder="example@gmail.com"/>
                 <input class="input-form" id="password" type="password" name="password" placeholder="Пароль"/>
                 <input name="submit" type="submit" value="Вхід">
-                <p class="message">Для роєстрації -><a href="registerUser_tmp.php">Реєстрація</a></p>
+                <p class="message">Для роєстрації -><a href="registclient.php">Реєстрація</a></p>
             </form>
         </div>
       </section>
