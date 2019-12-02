@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>SportPlanner</title>
 
-	<link href="style.css" rel="stylesheet">
+	<link href="styles/style.css" rel="stylesheet">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 	
@@ -18,7 +18,7 @@
     <![endif]-->
 </head>
 <body>
-	<div class="main4">
+	<div class="main3">
 
 		<!--Header-->
 		 <div id="myNavbar" class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -32,8 +32,8 @@
             <a href="#navbar" class="navbar-brand">SportPlanner</a>
           </div>
           <ul class="buttons">
-            <a href="index.html" class="navbar-brand"><li class="hov">Головна</li></a>
-             <a href="auth.html" class="navbar-brand"><li class="hov">Авторизація</li></a>
+             <a href="index.php" class="navbar-brand"><li class="hov">Головна</li></a>
+             <a href="auth.php" class="navbar-brand"><li class="hov">Авторизація</li></a>
           </ul>
           </div>
         </div>
@@ -43,12 +43,11 @@
 <section class="formreg">
         <div class="wrap">  
           <h3>
-          Шановний адміністратор, заповніть, будь ласка, інформацію
+          Шановний клієнт, заповніть, будь ласка, інформацію
         </h3>
        
         <form action="">
-          <label for="e-mail">Назва </label>
-          <input class="input-form" type="text" id="name"placeholder="SportLife" required="">
+         
           <label for="e-mail">E-Mail</label>
           <input class="input-form" type="text" id="e-mail"placeholder="example@gmail.com" required="">
           <label for="phone">Пароль </label>

@@ -1,43 +1,20 @@
 <?
+if(isset($_COOKIE['gid']))
+    header('Location: logout.php');
 
-include 'cabFunc.php';
+include $_SERVER["DOCUMENT_ROOT"]."/models/modelUser.php";
 
 if (count($_COOKIE) > 1)
 {
     if(!$_COOKIE['uid'] || !$_COOKIE['sid'] || $_COOKIE['uid']=="" || $_COOKIE['sid']=="")
         header('Location: logout.php');
-
-    $connect = sqlConnection();
-
-    if (!$connect) {
-        header('Location: ./error.php');
-    }
-
-    $sql = "SELECT orgName,id FROM users WHERE uid='".$_COOKIE['uid']."' AND sid='".$_COOKIE['sid']."'";
-
-    $result = $connect->query($sql);
-
-
-    $userdata = $result->fetch_row();
-    if(!$userdata) {
-        header("Location: logout.php"); exit();
-    }
-
-    $id = $userdata[1];
-
-    $sql = "SELECT sensor_info.id,name FROM (sensor_info INNER JOIN Access ON sensor_info.id=Access.senid) WHERE uid=".$id;
-
-    $result = $connect->query(utf8_encode($sql));
-
-    $sensors = array();
-
-    while($row = $result->fetch_row()){
-        $sensors[] = $row;
-    }
-
-    mysqli_close($connect);
+    $model = new modelUser();
+    $valid = $model->validateUser($_COOKIE['uid'], $_COOKIE['sid']);
+    if($valid !== true)
+        header("Location: /logout.php");
+    $model->destroy();
 } else {
-    header('Location: logout.php');
+    header('Location: /logout.php');
 }
 ?>
 
@@ -67,12 +44,11 @@ if (count($_COOKIE) > 1)
     <div id="name-label" class="divp">
         <div class="divp">
             <h3><?php
-            echo $userdata[0];
             ?></h3>
         </div>
         <div class="divp">
             <select value="1">
-                <?php printOptions(); ?>
+>
             </select>
         </div>
     </div>
@@ -83,7 +59,7 @@ if (count($_COOKIE) > 1)
         <div class="burger-line second"></div>
         <div class="burger-line third"></div>
         <div class="burger-line fourth"></div>
-        <nav class="main-menu" onclick="removeDropMenu();"><?php printMenu($sensors); ?></nav>
+        <nav class="main-menu" onclick="removeDropMenu();"></nav>
     </div>
     <div class="tools">
         <div id="timeS" class="divp right"><label id="curr_timeS"></label></div>

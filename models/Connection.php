@@ -12,7 +12,7 @@ class Connection {
 	}
 
 	function query($sql) {
-		return $this->connect->query(utf8_encode($sql));
+		return $this->connect->query($sql);
 	}
 
     function removeChars($text){

@@ -1,8 +1,8 @@
 <?php
 
 include "config.php";
-include "models\modelRegistration.php";
-include "models\modelLoginUser.php";
+include "\models\modelRegistrationUser.php";
+include "\models\modelLoginUser.php";
 
 // Страница регситрации нового пользователя
 
@@ -50,7 +50,7 @@ if(isset($_POST['submit']))
         $err[] = "Довжина ФІО має бути не менше 3 символів.";
     }
 
-    $query = $model->checkUser($valid_email);
+    $query = $model->findUser($valid_email);
 
     try{
         if($query)
@@ -71,15 +71,17 @@ if(isset($_POST['submit']))
     {
         $password = $_POST['password'];
 
-        $model->registerUser($valid_email, $password, $date, $valid_name);
+        $result = $model->registerUser($valid_email, $password, $date, $valid_name);
 
-        $result = $model->checkUser($valid_email);
+        $result = $model->findUser($valid_email);
 
         if($result) {
             $row = $result->fetch_row();
         }
+        else $err[] = "Проблема добавления юзера";
 
         $id = $row[0];
+
         $uid = md5($id);
         $sid = md5(rand(-100,100));
         $model->destroy();
@@ -92,8 +94,16 @@ if(isset($_POST['submit']))
         # Выдать sid, uid
         setcookie("sid", $sid, time() + $exp_time, "/", $baseUrl);
         setcookie("uid", $uid, time() + $exp_time, "/", $baseUrl);
-       
-        header("Location: loginUser.php"); exit();
+
+        if(count($err) == 0) {
+            header("Location: loginUser.php"); exit();
+        }
+        else {
+            $str = "<b>Помилки:</b><br>";
+            foreach ($err AS $error) {
+                $str .= $error . "<br>";
+            }
+        }
     }
 
 
@@ -108,7 +118,7 @@ if(isset($_POST['submit']))
 }
 
 if(isset($_POST['redirect'])) {
-    header("Location: login.php");exit();
+    header("Location: loginUser.php");exit();
 }
 
 ?>
@@ -134,7 +144,7 @@ if(isset($_POST['redirect'])) {
             <p>Дата народження:</p><input name="birthday" type="date">
             <p>
             <input name="submit" type="submit" value="Зареєструватись">
-            <p class="message">Для входу -><a href="./login.php">Вхід</a></p>
+            <p class="message">Для входу -><a href="./loginUser.php">Вхід</a></p>
         </form>
     </div>
 </div>
