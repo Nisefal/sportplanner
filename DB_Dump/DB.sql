@@ -21,7 +21,7 @@ CREATE TABLE IF NOT EXISTS gyms (
     uniqueIdentifier VARCHAR(16) NOT NULL,
     email VARCHAR(32) NOT NULL,
     description TEXT,
-    adress TEXT 
+    address TEXT 
 );
 
 CREATE TABLE IF NOT EXISTS requests (
