@@ -1,7 +1,7 @@
 <?php
 
-include_once "./methods/postMethods.php";
-include_once "./methods/getMethods.php";
+include_once "methods/postMethods.php";
+include_once "methods/getMethods.php";
 
 if(!isset($_POST) && !isset($_GET))
 	exit();
@@ -12,8 +12,8 @@ if (isset($_POST['method'])) {
 }
 
 if (isset($_GET['method'])) {
-    $function = htmlspecialchars($_POST["method"]);
-    $function();	
+    $function = htmlspecialchars($_GET["method"]);
+    $function($_GET);
 }
 
 ?>
