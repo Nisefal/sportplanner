@@ -1,44 +1,40 @@
-<html>
-<head>
-    <link rel="stylesheet" type="text/css" href="styles/style.css">
-    <link rel="stylesheet" type="text/css" href="styles/style-log.css">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-</head>
-<body>
-
 <?php
 
 include "config.php";
-include "models/modelLogin.php";
+include "\models\modelRegistrationUser.php";
+include "\models\modelLoginUser.php";
+
+// Страница регситрации нового пользователя
 
 // редирект, если уже авторизирован
-if ($_COOKIE['sid'] and  $_COOKIE["sid"] !== "")
-{
+if ($_COOKIE['sid'] and  $_COOKIE["sid"] !== "" )
     setcookie("sid", "", time() + $exp_time, "/", $baseUrl);
-}
-if ($_COOKIE['uid']  and $_COOKIE["uid"] !== "")
-{
-    setcookie("uid", "", time() + $exp_time, "/", $baseUrl);
-}
 
-$connect
+if ($_COOKIE['gid'] and $_COOKIE["gid"] !== "")
+    setcookie("gid", "", time() + $exp_time, "/", $baseUrl);
 
 if(isset($_POST['submit']))
 {
     if($_POST['email']==='')
-	$err[] = 'Вкажіть вашу електронну скриньку!';
-    if($_POST['orgName']==='')
-    $err[] = 'Вкажіть назву вашої організації!';
+        $err[] = 'Вкажіть вашу електронну скриньку!';
+    if($_POST['name']==='')
+        $err[] = 'Вкажіть назву спортзали!';
     if($_POST['password']==='')
-   	$err[] = 'Вкажіть пароль!';
+        $err[] = 'Вкажіть пароль!';
+    if($_POST['tele']==='')
+        $err[] = 'Вкажіть телефон!';
 
     $err = array();
     $email = $_POST['email'];
-    $orgName = $_POST['orgName'];
+    $name = $_POST['name'];
     $pass = $_POST['password'];
+    $tele = $_POST['tele'];
+
+    $model = new modelRegistrationGym();
 
     # чистим и проверям email
-    $valid_email = $connect->real_escape_string($email);
+
+    $valid_email = $model->removeChars($email);
     if(!filter_var($valid_email, FILTER_VALIDATE_EMAIL))
     {
         $err[] = "Неправильний формат електронної скриньки.";
@@ -49,94 +45,152 @@ if(isset($_POST['submit']))
         $err[] = "Довжина назви електронної скриньки має бути від 3 до 32 символів.";
     }
 
-    # чистим и проверяем логин
-    $valid_orgName = $connect->real_escape_string($orgName);
-    if(strlen($valid_orgName) < 3 or strlen($valid_orgName) > 30)
+    # чистим и проверяем имя
+    $valid_name = $model->removeChars($name);
+    if(strlen($valid_name) < 3)
     {
-        $err[] = "Довжина назви організації має бути від 3 до 32 символів.";
+        $err[] = "Довжина назви має бути не менше 3 символів.";
     }
 
-    $sql = "SELECT * FROM users WHERE email='".$valid_email."'";
-    $query = $connect->query(utf8_encode($sql));
+    $query = $model->findGym($valid_email);
 
     try{
-        $row = $query->fetch_row();
+        if($query)
+            $row = $query->fetch_row();
+        else new Exception();
         # пользователь существует
         if($row)
         {
-            $err[] = "Користувач з такою електронною скринькою вже існує. Використайте іншу або зверніться за відновленням за адресою roman@riara.ua.";
+            $err[] = "Користувач з такою електронною скринькою вже існує. Використайте іншу або зверніться за відновленням за адресою ".$adminmail;
         }
     } catch(Exception $exc) {
 
     }
-    
+
 
     # Если нет ошибок, то добавляем в БД нового пользователя
     if(count($err) == 0)
     {
-        $password = md5(md5($_POST['password']));
+        $password = $_POST['password'];
 
-        $sql = "INSERT INTO users SET email='".$valid_email."', password='".$password."', orgName='".$valid_orgName."'";
+        $result = $model->registerGym($valid_email, $password, $valid_name, $tele);
 
-        $connect->query(utf8_encode($sql));
+        $result = $model->findGym($valid_email);
 
-        $sql = "SELECT id FROM users WHERE email = '".$valid_email."';";
-
-        $result = $connect->query($sql);
-
-        $row = $result->fetch_row();
+        if($result) {
+            $row = $result->fetch_row();
+        }
+        else $err[] = "Проблема добавления юзера";
 
         $id = $row[0];
 
         $uid = md5($id);
-
         $sid = md5(rand(-100,100));
+        $model->destroy();
+        $model = new modelLoginUser();
+        $model->loginGym($id,$sid);
 
-        $sql = "UPDATE users SET uid='".$uid."', sid = '".$sid."' WHERE id=".$id;
-
-        $connect->query(utf8_encode($sql));
-        
-        mysqli_close($connect);
+        $model->destroy();
 
 
         # Выдать sid, uid
         setcookie("sid", $sid, time() + $exp_time, "/", $baseUrl);
-        setcookie("uid", $uid, time() + $exp_time, "/", $baseUrl);
-       
-        header("Location: login.php"); exit();
+        setcookie("gid", $uid, time() + $exp_time, "/", $baseUrl);
+
+        if(count($err) == 0) {
+            header("Location: authGym.php"); exit();
+        }
+        else {
+            $str = "<b>Помилки:</b><br>";
+            foreach ($err AS $error) {
+                $str .= $error . "<br>";
+            }
+        }
     }
+
+
 
     if (count($err)> 0) {
         $str = "<b>Помилки:</b><br>";
         foreach ($err AS $error) {
             $str .= $error . "<br>";
         }
-	echo $str;
+        echo $str;
     }
 }
+
 if(isset($_POST['redirect'])) {
-    header("Location: login.php");exit();
+    header("Location: authGym.php");exit();
 }
 
 ?>
-<!-- Thanks for styles to https://codepen.io/colorlib/pen/rxddKy -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>SportPlanner</title>
 
-<div class="login-page">
-    <div class="form">
-	<div>
-		<img width='250' src='/img/Logo_A.jpg'></img>
-		<br>
-		<br>
-	</div>
-        <form class="login-form" method="post">
-            <input name="email" type="text" placeholder="Електронна пошта">
-            <input name="orgName" type="text" placeholder="Назва організації">
-            <input name="password" type="password" placeholder="Пароль">
-            <p>
-            <input name="submit" type="submit" value="Зареєструватись">
-            <p class="message">Для входу -><a href="./login.php">Вхід</a></p>
-        </form>
+    <link href="styles/style.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+<div class="main3">
+
+    <!--Header-->
+    <div id="myNavbar" class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a href="#navbar" class="navbar-brand">SportPlanner</a>
+            </div>
+            <ul class="buttons">
+                <a href="index.php" class="navbar-brand"><li class="hov">Головна</li></a>
+                <a href="auth.php" class="navbar-brand"><li class="hov">Авторизація</li></a>
+            </ul>
+        </div>
     </div>
+    <!--End Header-->
+
+    <!--Body-->
+    <section class="formreg">
+        <div class="wrap">
+            <h3>
+                Шановний клієнт, заповніть, будь ласка, інформацію
+            </h3>
+
+            </form>
+
+            <form class="login-form" method="post">
+                <input class="input-form" name="email" type="text" placeholder="example@gmail.com">
+                <input class="input-form" name="name" type="text" placeholder="ФІО">
+                <input class="input-form" name="password" type="password" placeholder="Пароль">
+                <p>Дата народження:</p><input name="birthday" type="date">
+                <p>
+                    <input name="submit" type="submit" value="Зареєструватись">
+                <p class="message">Для входу -><a href="./auth.php">Вхід</a></p>
+            </form>
+        </div>
+
+
+    </section>
+
+
+    <!--End Body-->
 </div>
+
 </body>
 </html>
